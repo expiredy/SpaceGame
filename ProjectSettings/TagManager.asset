@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerMissales
+  - PlayerSpacecraft
+  - EnemyMissales
+  - EnemySpacecraft
+  - TimelimitedBonus
+  - UpgradeBonus
   layers:
   - Default
   - TransparentFX
@@ -11,12 +17,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerSpacecraft
+  - PleyerMissales
+  - EnemySpacecraft
+  - EnemyMissales
+  - TimelimitedBonus
+  - UpgradeBonus
   - 
   - 
   - 

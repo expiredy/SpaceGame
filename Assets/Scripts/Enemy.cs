@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public float movementSpeed = 15f, health = 10f, fireRateCooldown = 0.4f, scoreForDistruction=100; 
+    public float movementSpeed = 15f, health = 10f, damagePerShoot = 20f, fireRateCooldown = 0.4f, scoreForDistruction=100; 
     public float radius = 1f;
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,16 @@ public class Enemy : MonoBehaviour
     void CheckForDeath(){
          if (this.transform.position.y < -Camera.main.orthographicSize ){
             Destroy(this.transform.gameObject);    
+        }
+    }
+    
+    void onCollisionEnter(Collision collisionEvent){
+		print("Go suck yourself");
+		foreach(ContactPoint contactPoint in collisionEvent.contacts){
+        	Transform collidedObjectTransform = contactPoint.thisCollider.gameObject.transform.root;
+        	if (collidedObjectTransform.gameObject.tag == "PlayerSpacecraft"){
+            	collidedObjectTransform.gameObject.GetComponent<SpacecraftBehavior>().GetDamege(damagePerShoot);
+			}
         }
     }
 }

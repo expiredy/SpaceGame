@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 20
   health: 10
+  damagePerShoot: 20
   fireRateCooldown: 0.4
   scoreForDistruction: 100
   radius: 1

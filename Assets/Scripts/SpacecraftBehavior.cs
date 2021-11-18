@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class SpacecraftBehavior : MonoBehaviour
 {
-
-    public Transform spacecraftModel;
-    
     public float gamefieldBoarderWidth, gamefieldBoarderHeight;
 
     public const float sideMarginParam = 5;
     public const float heightsMarginParam = 3;
+
+    public const float maxCurrentHelathParametr = 100f;
+    public float currentHealtParametr = maxCurrentHelathParametr;
     
     private float _xHorizontalAxis, _yVeticalAxis;
     public float horizontalSpeed = 30;
     public float verticalSpeed = 10;
-    private float backSpeedMultiplayer = 30;
+    private float backSpeedMultiplayer = 3;
     public float rotationMultiplaier = 20;
     
     // Start is called before the first frame update
@@ -34,7 +34,9 @@ public class SpacecraftBehavior : MonoBehaviour
 
     private void MovePlayer()
     {
-        this._yVeticalAxis = Input.GetAxis("Vertical") * verticalSpeed * Time.deltaTime;
+        this._yVeticalAxis = Input.GetAxis("Vertical") > 0 ?
+                             Input.GetAxis("Vertical") * verticalSpeed * Time.deltaTime : 
+                             Input.GetAxis("Vertical") * verticalSpeed * Time.deltaTime * backSpeedMultiplayer;
         this._xHorizontalAxis = Input.GetAxis("Horizontal") * horizontalSpeed * Time.deltaTime;
         this.transform.position = new Vector3(Mathf.Clamp(this.transform.position.x + _xHorizontalAxis, -gamefieldBoarderWidth, gamefieldBoarderWidth),
                                               Mathf.Clamp(this.transform.position.y + _yVeticalAxis, -gamefieldBoarderHeight, gamefieldBoarderHeight),
@@ -54,6 +56,19 @@ public class SpacecraftBehavior : MonoBehaviour
         //TODO: make player gp low and die in a fricking fire
         // Rigidbody spacecraftRigidbody = this.AddComponent(typeof(Rigidbody)) as Rigidbody;
         // spacecraftRigidbody.AddForce();
+    }
+
+    public void GetDamege(float damage)
+    {
+        currentHealtParametr -= damage;
+    }
+    
+    void onTriggerEnter(Collider collider){
+        Transform collidedObjectTransform = collider.gameObject.transform.root;
+        if (collidedObjectTransform.gameObject.tag == "EnemySpacecraft")
+        {
+            
+        }    
     }
 }
  
